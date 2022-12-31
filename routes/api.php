@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\TablesController;
-
+use App\Http\Controllers\Api\CounteryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,11 +21,11 @@ use App\Http\Controllers\Api\TablesController;
 
 Route::middleware('auth:sanctum')->group( function () {
     // Route::resource('blogs', BlogController::class);
-    
-
+Route::Apiresource('company',CompanyController::class);
+Route::Apiresource('tables',TablesController::class);
+Route::Apiresource('countery',CounteryController::class);
 });
 Route::post('/auth/register', [AuthController::class, 'signup']);
 Route::post('/auth/login', [AuthController::class, 'loginUser']);
-Route::Apiresource('company',CompanyController::class);
-Route::Apiresource('tables',TablesController::class);
+
 

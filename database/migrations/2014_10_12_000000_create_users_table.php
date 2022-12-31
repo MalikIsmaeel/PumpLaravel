@@ -18,12 +18,12 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('meddile_name')->nullable();
             $table->string('last_name');
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->string('name')->unique();
            
             $table->integer('active')->default(0);
-            $table->string('photo');
+            $table->string('photo')->nullable();
             
             /*
 first_name

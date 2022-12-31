@@ -31,6 +31,12 @@ class User extends Authenticatable
     public function tables(){
         return $this->hasMany(tables::class); 
     }
+    public function countery(){
+        return $this->hasMany(countery::class); 
+    }
+    public function city(){
+        return $this->hasMany(city::class); 
+    }
 
     /**
      * The attributes that should be hidden for serialization.
