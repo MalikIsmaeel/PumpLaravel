@@ -13,7 +13,7 @@ class CityRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class CityRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'city_name'=>'required',
+            'city'=>'required',
+            'countery_id'=>'required',
+             'active'=>'required',
+            'user_id'=>'required'
         ];
     }
 }

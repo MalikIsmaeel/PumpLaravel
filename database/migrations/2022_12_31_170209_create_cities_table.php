@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
             $table->string('city_name');
-             $table->float('vat_rate',18,2);
+            $table->string('city_nameAr');
              $table->unsignedInteger('active');
              $table->foreignId('user_id')
              ->references('id')->on('users')

@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\TablesController;
 use App\Http\Controllers\Api\CounteryController;
+use App\Http\Controllers\Api\cityController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,6 +25,7 @@ Route::middleware('auth:sanctum')->group( function () {
 Route::Apiresource('company',CompanyController::class);
 Route::Apiresource('tables',TablesController::class);
 Route::Apiresource('countery',CounteryController::class);
+Route::Apiresource('city',cityController::class);
 });
 Route::post('/auth/register', [AuthController::class, 'signup']);
 Route::post('/auth/login', [AuthController::class, 'loginUser']);
