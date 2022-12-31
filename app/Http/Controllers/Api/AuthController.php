@@ -26,7 +26,7 @@ class AuthController extends BaseController
     public function signup(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'name' => 'required|unique:users',
             'email' => 'required|email',
             'password' => 'required',
             'confirm_password' => 'required|same:password',
@@ -48,7 +48,7 @@ class AuthController extends BaseController
         $success['first_name'] =  $user->first_name;
         $success['last_name'] =  $user->last_name;
         $success['phone'] =  $user->phone;
-        $success['active'] =  $user->active;
+        $success['active'] =  $user->first_name;
    
    
         return $this->sendResponse($success, 'User created successfully.');

@@ -5,66 +5,51 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\user;
 use Illuminate\Http\Request;
-
-class usersController extends Controller
+use App\Http\Controllers\API\BaseController as BaseController;
+use Illuminate\Support\Facades\Auth;
+use Validator;
+class usersController extends BaseController
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+   
+    
+    public function update(Request $request, User $User)
     {
-        $users = Post::all();
-
-        return response()->json([
-            'status' => true,
-            'posts' => $users
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:users',
+            'email' => 'required|email',
+            'password' => 'required',
+            'confirm_password' => 'required|same:password',
+            'first_name'=>'required',
+            'last_name'=>'required',
+            'phone'=>'required',
+            'active'=>'required'
         ]);
+   
+        if($validator->fails()){
+            return $this->sendError('Error validation', $validator->errors());       
+        }
+   
+        $user = $request->all();
+        
+        $user->update($validator);
+    
+        $success['name'] =  $user->name;
+        $success['first_name'] =  $user->first_name;
+        $success['last_name'] =  $user->last_name;
+        $success['phone'] =  $user->phone;
+        $success['active'] =  $user->first_name;
+   
+        return $this->sendResponse($success, 'User updated successfully.');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+   
+    public function destroy(Blog $blog)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\user  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(user $user)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\user  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, user $user)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\user  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(user $user)
-    {
-        //
+        $blog->delete();
+        return $this->sendResponse([], 'Post deleted.');
     }
 }

@@ -24,7 +24,12 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'=>['requied','string','unique:companies','max:255'],
+            'email'=>['required','unique:companies','email'],
+            'address'=>['string'],
+            'photo',
+            'active'
+            
         ];
     }
 }
